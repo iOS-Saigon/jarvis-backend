@@ -1,6 +1,7 @@
-# Totoro
+# Totoro - Swift Good Practices
 
-This is my proposal to the upcoming Startup Weekend iOS Saigon Group Project - Mai Mai.
+This is my proposal good practices to the upcoming Startup Weekend iOS Saigon Group Project - Mai Mai.
+Because being a programmer is not only about selling out the products but also about qualifying the source code.
 
 ###Language
 Please use US English spelling to match with Apple's API. For example, consider using `color` instead of `colour`.
@@ -45,7 +46,7 @@ struct PrettyThing {
 }
 
 class PrettyThingsCollectionViewController {
-    func getRemotePrettyThingsList() {...}
+    func getPrettyThingsList() {...}
 }
 ```
 
@@ -80,4 +81,4 @@ Thanks Zalora for enlightening me how mean storyboard is, and thanks to Zhenling
 * Storyboard is not flexible. If you want to go with autolayout, then you will have to go with autolayout for every views in the storyboards. Why can't we not go with autoresizing selectively on some simple views? Life is too short to complicate things.
 * I know some of you might love using segues, but for me, segue is a bitch. Why? Because magic strings. Why? Because we cannot use designated initializers and avoid introducing mutable state to your properties when not needed (which annoys me more than it should)
 
-Don't get me wrong. I love the idea of setting up UI visually, which can be done with `xib`. If I can set some UI properties using IB, then I will use IB. Let's avoid building the UI programmatically as much as possible.
+Don't get me wrong. I love the idea of setting up UI visually, which can be done using `xib`. If I can set some UI properties using IB, then I will use IB. Let's avoid building the UI programmatically as much as possible.
