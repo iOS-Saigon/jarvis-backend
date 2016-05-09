@@ -1,5 +1,7 @@
 # Totoro - Swift Good Practices
 
+![alt Don't make my life harder](http://i.imgur.com/T0gOgrX.png)
+
 This is my proposal good practices to the upcoming Startup Weekend iOS Saigon Group Project - Mai Mai.
 Because being a programmer is not only about selling out the products but also about qualifying the source code.
 
