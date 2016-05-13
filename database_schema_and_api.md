@@ -9,11 +9,12 @@ poster
 
 ### Theater
 
-Theater's are the places where movies are played. A theater can have a name etc.
+Theater's are the places where movies are played. A theater can have a name, address etc.
 
 #### Attributes
 
 name
+address
 
 ### Screening
 
