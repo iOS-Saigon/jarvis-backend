@@ -1,4 +1,4 @@
-### Movies
+### Movie
 
 A movie can have a title, poster etc.
 
@@ -7,20 +7,20 @@ A movie can have a title, poster etc.
 title
 poster
 
-### Theatres
+### Theater
 
-Theatres are the places where movies are played. A theatre can have a name etc.
+Theater's are the places where movies are played. A theater can have a name etc.
 
 #### Attributes
 
 name
 
-### Screenings
+### Screening
 
-A screening represents the showing of a movie at a particular theatre at a particular time on a particular day
+A screening represents the showing of a movie at a particular theater at a particular time on a particular day
 
 #### Attributes
 
 time
 movie_id
-theatre_id
+theater_id
