@@ -4,8 +4,8 @@ A movie can have a title, poster etc.
 
 #### Attributes
 
-title
-poster
+title  
+poster  
 
 ### Theater
 
@@ -13,8 +13,8 @@ Theater's are the places where movies are played. A theater can have a name, add
 
 #### Attributes
 
-name
-address
+name  
+address  
 
 ### Screening
 
@@ -22,6 +22,6 @@ A screening represents the showing of a movie at a particular theater at a parti
 
 #### Attributes
 
-screening_at
-movie_id
-theater_id
+screening_at  
+movie_id  
+theater_id  
