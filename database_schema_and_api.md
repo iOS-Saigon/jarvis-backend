@@ -1,26 +1,28 @@
-### Movie
+### Database Schema
+
+#### Movie
 
 A movie can have a title, poster etc.
 
-#### Attributes
+##### Attributes
 
 title  
 poster  
 
-### Theater
+#### Theater
 
 Theater's are the places where movies are played. A theater can have a name, address etc.
 
-#### Attributes
+##### Attributes
 
 name  
 address  
 
-### Screening
+#### Screening
 
 A screening represents the showing of a movie at a particular theater at a particular time on a particular day
 
-#### Attributes
+##### Attributes
 
 screening_at  
 movie_id  
