@@ -7,7 +7,7 @@ poster
 
 name
 
-### Screeningsg
+### Screenings
 
 time
 movie_id
