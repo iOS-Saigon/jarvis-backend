@@ -22,6 +22,6 @@ A screening represents the showing of a movie at a particular theater at a parti
 
 #### Attributes
 
-time
+datetime
 movie_id
 theater_id
