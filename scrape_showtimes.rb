@@ -5,8 +5,8 @@ require "active_record"
 require "sqlite3"
 
 ActiveRecord::Base.logger = Logger.new(STDERR)
+# Delete any existing database
 begin
-  FileUtils.rm("./titan.sqlite3")
 rescue Errno::ENOENT
 end
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: "./titan.sqlite3")
@@ -47,24 +47,6 @@ class Screening < ActiveRecord::Base
   belongs_to :movie
   belongs_to :theater
 end
-
-# ActiveRecord::Migration.class_eval do
-#   create_table :movies do |t|
-#     t.string :name
-#   end
-#
-#   create_table :theaters do |t|
-#     t.string :name
-#     t.string :district
-#     t.string :brand
-#   end
-#
-#   create_table :screenings do |t|
-#     t.datetime screening_at
-#     t.integer movie_id
-#     t.integer theater_id
-#   end
-# end
 
 class Movie < ActiveRecord::Base
 end
