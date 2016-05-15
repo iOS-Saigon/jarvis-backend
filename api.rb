@@ -95,7 +95,8 @@ get "/reply" do
   wit_response = WitResponse.new(wit_response_hash)
   reply_text = WitResponseHandler.new.handle_response(wit_response)
 
-  { reply: { text: reply_text } }.to_json
+  # { reply: { text: reply_text } }.to_json
+  { reply: reply_text }.to_json
 end
 
 post "/restart_conversation" do
