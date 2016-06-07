@@ -123,7 +123,7 @@ Well, here in Swift, the logic is gonna be the same, our first attemption is to 
     }
 }
 ```
-You should pay a particular attention to why I use `weak` not `unowned` here. If you ever read through the Apple documentations, they say thay `unowned` reference is non-optional, which means you don't have to unwrapp it. It is generally safer for you to use `weak`, because using unowned assumes the object will never be nil. This may lead to your app crashing if the object has actually been deallocated before being used in your closure. 
+You should pay a particular attention to why I use `weak` not `unowned` here. If you ever read through the Apple documentations, they say that `unowned` reference is non-optional, which means you don't have to unwrap it. It is generally safer for you to use `weak`, because using `unowned` assumes the object will never be nil. This may lead to your app crashing if the object has actually been deallocated before being used in your closure. 
 Okay, the syntax above looks okay, but what if we can do this in a Swifty way? For the sake of robust code, let's all find a way to handle this Swiftily. Swift 2.0 introduced a new statement, guard, to simplify a code structure and to finally get rid of scary pyramids of `if` statements. Embracing the power of guards inside closures can rapidly enhance our lives and set a smart convention in programming, also guard guarantees the early exit - don't we all love it?
 
 ```
