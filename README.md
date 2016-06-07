@@ -84,3 +84,80 @@ Thanks Zalora for enlightening me how mean storyboard is, and thanks to Zhenling
 * I know some of you might love using segues, but for me, segue is a bitch. Why? Because magic strings. Why? Because we cannot use designated initializers and avoid introducing mutable state to your properties when not needed (which annoys me more than it should)
 
 Don't get me wrong. I love the idea of setting up UI visually, which can be done using `xib`. If I can set some UI properties using IB, then I will use IB. Let's avoid building the UI programmatically as much as possible.
+
+###Block Retain Cycle
+Retaining cycles are one of the most dangerous mistakes programmers can make, as these cycles can lead to unexpected crashes and huge memory consumption. There are multiple ways to tackle well-known retain cycle issues.
+Let's take a look at this code :
+
+```
+class PrettyThing {
+    func doStuff(completion: (() -> Void)?) {
+        completion?()
+    }
+}
+
+class Controller: UIViewController {
+    let myPrettyThing = PrettyThing()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        myPrettyThing.doStuff {
+            self.doSomething()
+        }
+    }
+}
+```
+In our case, method doSomething() causes retaining because the closure is capturing self as a strong reference to it. 
+Take 1 minute to look into how we handle this little boy in Obj C, first we will make a weak reference to the object(s) we wish to use in the closure.
+`weak typeof(self) *weakSelf = self;`
+And then we will continue with `weakSelf` in the closure.
+
+Well, here in Swift, the logic is gonna be the same, our first attemption is to make a `weak` copy of self
+```
+    override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    myPrettyThing.doStuff { [weak self] in
+        self?.doSomething()
+    }
+}
+```
+You should pay a particular attention to why I use `weak` not `unowned` here. If you ever read through the Apple documentations, they say thay `unowned` reference is non-optional, which means you don't have to unwrapp it. It is generally safer for you to use `weak`, because using unowned assumes the object will never be nil. This may lead to your app crashing if the object has actually been deallocated before being used in your closure. 
+Okay, the syntax above looks okay, but what if we can do this in a Swifty way? For the sake of robust code, let's all find a way to handle this Swiftily. Swift 2.0 introduced a new statement, guard, to simplify a code structure and to finally get rid of scary pyramids of `if` statements. Embracing the power of guards inside closures can rapidly enhance our lives and set a smart convention in programming, also guard guarantees the early exit - don't we all love it?
+
+```
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    myPrettyThing.doStuff { [weak self] in
+        guard let aSelf = self else {
+            return 
+        }
+        
+        aSelf.doSomething()
+    }
+}
+```
+The guard statement was used to protect self, not to be nil, and if so a code won’t continue in the closure. Using a local variable `aSelf` will ensure that there will be no retain cycle.
+
+A syntax sugar in the end - wouldn’t it be great to use just self instead of aSelf? Yes, it would, my argue is that I don't want to create a new name. Using back quotes together with a guard statement can lead to the code below:
+
+```
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    myPrettyThing.doStuff { [weak self] in
+        guard let `self` = self else {
+            return 
+        }
+        
+        self.doSomething()
+    }
+}
+```
+If you are confusing about the use of backtick here, please check this [Lexical Structure](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/LexicalStructure.html). Because `self` is a reserved keyword, so if we wish to use it as an identifier, all we do is to simply wrap it with backtick `
+
+```
+To use a reserved word as an identifier, put a backtick (`) before and after it. For example, class is not a valid identifier, but `class` is valid. The backticks are not considered part of the identifier; `x` and x have the same meaning.
+```
